@@ -12,6 +12,6 @@ namespace Chengdexy.CN.Models
         public string Cname { get; set; }
         public string Motive { get; set; }
         public string Describe { get; set; }
-        public List<ProgramEdition> ProgramEditions { get; set; }
+        public virtual List<ProgramEdition> ProgramEditions { get; set; }
     }
 }

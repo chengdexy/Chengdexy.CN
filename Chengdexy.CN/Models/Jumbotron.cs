@@ -7,6 +7,7 @@ namespace Chengdexy.CN.Models
 {
     public class Jumbotron
     {
+        public int ID { get; set; }
         public string Capital { get; set; }
         public string Describe { get; set; }
         public string DownloadButtonText { get; set; }

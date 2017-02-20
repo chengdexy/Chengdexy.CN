@@ -12,6 +12,7 @@ namespace Chengdexy.CN.Models
     /// </summary>
     public class BlogSketch
     {
+        public int ID { get; set; }
         public string ImageFileName { get; set; }
         public string BlogCapital { get; set; }
         public string BlogDescribe { get; set; }

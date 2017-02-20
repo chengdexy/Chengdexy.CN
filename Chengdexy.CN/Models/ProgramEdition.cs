@@ -9,5 +9,6 @@ namespace Chengdexy.CN.Models
         public DateTime PublishDate { get; set; }
         public string EditionString { get; set; }
         public string DownloadUrl { get; set; }
+        public virtual Program Program { get; set; }
     }
 }
