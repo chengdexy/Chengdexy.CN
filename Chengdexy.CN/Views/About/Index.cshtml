@@ -1,0 +1,24 @@
+﻿@model Chengdexy.CN.ViewModels.AboutItemVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Action("ShowNavbar")
+<br />
+<div class="col-md-10 col-md-offset-1">
+    <img title="@Model.ImageTitle" src="@Model.ImageUrl" class="img-thumbnail">
+    <p></p>
+    <table class="table table-hover">
+        @foreach (var item in Model.ItemList)
+        {
+            <tr>
+                <td class="text-right"><strong>@item.Text</strong></td>
+                <td>@item.Value</td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,31 @@
+﻿@model List<Chengdexy.CN.Models.Program>
+
+@foreach (var program in Model)
+{
+    <div class="panel panel-default">
+        <!--Default panel contents-->
+        <div class="panel-heading"><big><b><i>@program.Ename</i></b></big>&nbsp;<small>@program.Cname</small> </div>
+        <div class="panel-body">
+            <p class="text-muted"><i>@program.Motive</i></p>
+            <strong>@program.Ename 目前支持</strong>
+            <div>
+                @program.Describe
+            </div>
+        </div>
+        <!--Table-->
+        <table class="table text-center">
+            @foreach (var edition in program.ProgramEditions)
+            {
+                <tr>
+                    <td>@edition.PublishDate.ToString("yyyy-MM-dd")</td>
+                    <td class="text-left"><i>@program.Ename @edition.EditionString</i></td>
+                    <td>
+                        <a class="btn btn-default btn-sm" href="@edition.DownloadUrl">下载</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Chengdexy is here</title>
+    <link rel="stylesheet" href="~/CSS/bootstrap.min.css">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <style type="text/css">
+        body {
+            font-family: "微软雅黑";
+            background-color: silver;
+        }
+
+        .container {
+            background-color: white;
+        }
+
+        .text-indent {
+            text-indent: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <!--头部-->
+        <div class="page-header">
+            <h1>
+                Hey, It's Chengdexy
+                <small>Welcome, it's all about me.</small>
+            </h1>
+        </div>
+        
+        <br />
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+    <footer class="text-center">
+        <div class="container col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <hr />
+            <p class="text-center">Built by <a href="mailto:chengdexy@sina.com">@@Chengdexy</a>, February 15, 2017.</p>
+            <br />
+        </div>
+    </footer>
+    <script src="~/JS/jquery.js"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+</body>
+</html>

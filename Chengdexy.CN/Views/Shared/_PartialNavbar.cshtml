@@ -1,0 +1,17 @@
+﻿@model Chengdexy.CN.ViewModels.NavbarItemVM
+<!--主导航-->
+<div>
+    <ul class="nav nav-tabs">
+        @for (int i = 0; i < Model.NavbarItems.Count; i++)
+        {
+            string active = string.Empty;
+            if (Model.ActiveIndex == i + 1)
+            {
+                active = "active";
+            }
+                <li role="presentation" class="@active">
+                    @Html.ActionLink(Model.NavbarItems[i].Text, Model.NavbarItems[i].Action, Model.NavbarItems[i].Route)
+                </li>
+        }
+    </ul>
+</div>
