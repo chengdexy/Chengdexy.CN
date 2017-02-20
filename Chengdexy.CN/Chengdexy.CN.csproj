@@ -126,6 +126,7 @@
     <Content Include="Views\Programs\Index.cshtml" />
     <Content Include="Views\Shared\_PartialProgramList.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\publish_Chengdexy.CN.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
