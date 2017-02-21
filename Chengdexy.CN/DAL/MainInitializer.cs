@@ -1,8 +1,10 @@
 ﻿using Chengdexy.CN.Models;
+using Chengdexy.CN.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace Chengdexy.CN.DAL
@@ -11,6 +13,7 @@ namespace Chengdexy.CN.DAL
     {
         protected override void Seed(MainContext context)
         {
+            #region 前台Models初始化
             //
             // 初始化导航条
 
@@ -153,6 +156,42 @@ namespace Chengdexy.CN.DAL
             };
             Programs.ForEach(p => context.Programs.Add(p));
             context.SaveChanges();
+            #endregion
+            #region 后台Models初始化
+
+            //
+            // 初始化AdminAccount
+
+            var adminAccounts = new List<AdminAccount>
+            {
+                new AdminAccount
+                {
+                    Account="admin",
+                    Password=MD5maker.GetMd5Hash(MD5.Create(),"darkmoon1")
+                }
+            };
+            adminAccounts.ForEach(aa => context.AdminAccounts.Add(aa));
+            context.SaveChanges();
+
+            //
+            // 初始化AdminSidebarItem
+
+            var adminSidebarItems = new List<AdminSidebarItem>
+            {
+                new AdminSidebarItem {Text="后台首页",Controller="Admin",Action="Index" },
+                new AdminSidebarItem { Text="网站设置",Controller="WebsiteSettings",Action="Index"},
+                new AdminSidebarItem { Text="首页设置",Controller="HomepageSettings",Action="Index"},
+                new AdminSidebarItem { Text="关于页设置",Controller="AboutSettings",Action="Index"},
+                new AdminSidebarItem { Text="主导航设置",Controller="NavbarSettings",Action="Index"},
+                new AdminSidebarItem { Text="编程作品管理",Controller="ProgramSettings",Action="Index"},
+                new AdminSidebarItem { Text="博客博文管理",Controller="BlogSettings",Action="Index"},
+                new AdminSidebarItem { Text="管理员账号管理",Controller="AdminSettings",Action="Index"},
+            };
+            adminSidebarItems.ForEach(asi => context.AdminSidebarItems.Add(asi));
+            context.SaveChanges();
+
         }
     }
+    #endregion
 }
+

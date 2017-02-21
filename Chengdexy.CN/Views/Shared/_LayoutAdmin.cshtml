@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Space : Chengdexy.Cn</title>
+    <link rel="stylesheet" type="text/css" href="~/CSS/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/CSS/base.css" />
+    <style type="text/css">
+        body {
+            font-family: "微软雅黑";
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Chengdexy.CN</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">Chengdexy.CN</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                @*这里是主导航topbar*@
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="@Url.Action("Logout","Login")">Log Out</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Back Home</a>
+                    </li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                @RenderBody()
+                @*<div class="col-sm-3 col-md-2 sidebar">
+                        这里是导航sidebar
+                            <ul class="nav nav-sidebar">
+                                <li class="active">
+                                    <a href="">网站设置</a>
+                                </li>
+                                <li>
+                                    <a href="">首页设置</a>
+                                </li>
+                                <li>
+                                    <a href="">关于页设置</a>
+                                </li>
+                                <li>
+                                    <a href="">主导航设置</a>
+                                </li>
+                                <li>
+                                    <a href="">编程作品管理</a>
+                                </li>
+                                <li>
+                                    <a href="">博客博文管理</a>
+                                </li>
+                                <li>
+                                    <a href="">管理员账号管理</a>
+                                </li>
+                            </ul>
+                    </div>
+                    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                        @RenderBody()
+                        这里是内容模块
+                            <h1 class="page-header">网站设置</h1>
+                            <div class="content">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="inputFileIcon">网站图标</label>
+                                        <input type="file" id="inputFileIcon">
+                                        <p class="help-block">上传网站图标，只接受Icon文件（*.ico）</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTextTitle">网站Title文本</label>
+                                        <input type="text" class="form-control" id="inputTextTitle" placeholder="Chengdexy is here">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTextMainCapital">网站页面主标题</label>
+                                        <input type="text" class="form-control" id="inputTextMainCapital" placeholder="Hey, It's Chengdexy">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputTextSubCapital">网站页面副标题</label>
+                                        <input type="text" class="form-control" id="inputTextSubCapital" placeholder="Welcome, it's all about me.">
+                                    </div>
+                                    <button type="submit" class="btn btn-default pull-right">提交更改</button>
+                                </form>
+                            </div>
+                            </div>*@
+            </div>
+        </div>
+    </div>
+
+    <!--js-->
+    <script src="~/JS/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/JS/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

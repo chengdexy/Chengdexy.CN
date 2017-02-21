@@ -20,6 +20,8 @@ namespace Chengdexy.CN.DAL
         public DbSet<BlogPage> BlogPages { get; set; }
         public DbSet<Jumbotron> Jumbotrons { get; set; }
         public DbSet<NavbarItem> NavbarItems { get; set; }
+        public DbSet<AdminAccount> AdminAccounts { get; set; }
+        public DbSet<AdminSidebarItem> AdminSidebarItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

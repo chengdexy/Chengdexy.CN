@@ -1,0 +1,17 @@
+﻿@model Chengdexy.CN.ViewModels.SidebarItemVM
+
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+        @for (int i = 0; i < Model.SidebarItems.Count; i++)
+        {
+            string active = string.Empty;
+            if (Model.ActiveIndex == i + 1)
+            {
+                active = "active";
+            }
+            <li class="@active">
+                @Html.ActionLink(Model.SidebarItems[i].Text, Model.SidebarItems[i].Action, Model.SidebarItems[i].Controller)
+            </li>
+        }
+    </ul>
+</div>

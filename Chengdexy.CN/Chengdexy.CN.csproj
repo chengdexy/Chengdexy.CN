@@ -97,7 +97,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\base.css" />
     <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\login.css" />
     <Content Include="Global.asax" />
     <Content Include="JS\bootstrap.min.js" />
     <Content Include="JS\jquery.js" />
@@ -106,8 +108,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="DAL\MainContext.cs" />
@@ -116,15 +120,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AboutItem.cs" />
+    <Compile Include="Models\AdminAccount.cs" />
+    <Compile Include="Models\AdminSidebarItem.cs" />
     <Compile Include="Models\BlogDetail.cs" />
     <Compile Include="Models\Jumbotron.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\ProgramEdition.cs" />
+    <Compile Include="Utils\MD5maker.cs" />
     <Compile Include="ViewModels\AboutItemVM.cs" />
     <Compile Include="ViewModels\BlogSketchVM.cs" />
     <Compile Include="ViewModels\NavbarItemVM.cs" />
     <Compile Include="Models\NavbarItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SidebarItemVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -140,6 +148,10 @@
     <Content Include="Views\Blogs\Index.cshtml" />
     <None Include="Properties\PublishProfiles\publish_Chengdexy.CN.pubxml" />
     <Content Include="Views\Show\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Shared\_PartialAdminSidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
