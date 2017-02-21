@@ -1,4 +1,5 @@
-﻿using Chengdexy.CN.Models;
+﻿using Chengdexy.CN.DAL;
+using Chengdexy.CN.Models;
 using Chengdexy.CN.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace Chengdexy.CN.Controllers
 {
     public class BlogsController : Controller
     {
+        private MainContext db = new MainContext();
+
         // GET: Blogs
         public ActionResult Index()
         {
@@ -19,25 +22,9 @@ namespace Chengdexy.CN.Controllers
         [ChildActionOnly]
         public ActionResult ShowNavbar()
         {
-            List<NavbarItem> itemList = new List<NavbarItem>();
-            NavbarItem nav = new NavbarItem()
-            {
-                ID = 1,
-                Text = "Home",
-                Route = "Home",
-                Action = "Index"
-            };
-            itemList.Add(nav);
-            nav = new Models.NavbarItem()
-            {
-                ID = 2,
-                Text = "Blogs",
-                Route = "Blogs",
-                Action = "Index"
-            };
-            itemList.Add(nav);
+            var itemList = db.NavbarItems.ToList();
 
-            return PartialView("~/Views/Shared/_PartialNavbar.cshtml", new NavbarItemVM(itemList, 2));
+            return PartialView("~/Views/Shared/_PartialNavbar.cshtml", new NavbarItemVM(itemList, 3));
         }
     }
 }

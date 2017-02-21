@@ -1,0 +1,22 @@
+﻿@model Chengdexy.CN.Models.BlogPage
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Action("ShowNavbar","Blogs")
+<!--内容部分-->
+<div class="content">
+    <h1>@Model.Title<br /><small class="pull-right">@Model.CreateTime.ToString("yyyy年MM月dd日")</small></h1>
+    <hr />
+    <blockquote>
+        <p>@Model.Sketch</p>
+    </blockquote>
+    <div>
+        @Model.Content
+    </div>
+</div>
+
+<!--内容部分结束-->
+<a href="#top" class="btn btn-default btn-sm pull-right">返回顶部</a>
+

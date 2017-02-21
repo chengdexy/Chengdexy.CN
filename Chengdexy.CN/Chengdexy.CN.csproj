@@ -109,19 +109,21 @@
     <Compile Include="Controllers\BlogsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
+    <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="DAL\MainContext.cs" />
     <Compile Include="DAL\MainInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AboutItem.cs" />
+    <Compile Include="Models\BlogDetail.cs" />
     <Compile Include="Models\Jumbotron.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\ProgramEdition.cs" />
     <Compile Include="ViewModels\AboutItemVM.cs" />
+    <Compile Include="ViewModels\BlogSketchVM.cs" />
     <Compile Include="ViewModels\NavbarItemVM.cs" />
     <Compile Include="Models\NavbarItem.cs" />
-    <Compile Include="Models\BlogSketch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +139,7 @@
     <Content Include="Views\Shared\_PartialProgramList.cshtml" />
     <Content Include="Views\Blogs\Index.cshtml" />
     <None Include="Properties\PublishProfiles\publish_Chengdexy.CN.pubxml" />
+    <Content Include="Views\Show\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

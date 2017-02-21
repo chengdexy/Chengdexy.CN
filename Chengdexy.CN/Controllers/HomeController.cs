@@ -28,7 +28,13 @@ namespace Chengdexy.CN.Controllers
         [ChildActionOnly]
         public ActionResult ShowSketchList()
         {
-            var sketchList = db.BlogSketchs.ToList();
+            var sketchList = db.BlogPages.Select(sl => new BlogSketchVM
+            {
+                BlogPageId = sl.ID,
+                BlogPageTitle = sl.Title,
+                BlogPageSketch = sl.Sketch,
+                BlogPageImagePath = sl.ImagePath
+            }).ToList();
             return PartialView("~/Views/Shared/_PartialSketchList.cshtml", sketchList);
         }
 

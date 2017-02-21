@@ -17,7 +17,7 @@ namespace Chengdexy.CN.DAL
         public DbSet<Program> Programs { get; set; }
         public DbSet<ProgramEdition> ProgramEditions { get; set; }
         public DbSet<AboutItem> AboutItems { get; set; }
-        public DbSet<BlogSketch> BlogSketchs { get; set; }
+        public DbSet<BlogPage> BlogPages { get; set; }
         public DbSet<Jumbotron> Jumbotrons { get; set; }
         public DbSet<NavbarItem> NavbarItems { get; set; }
 

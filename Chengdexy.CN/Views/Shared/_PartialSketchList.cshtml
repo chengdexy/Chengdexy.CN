@@ -1,4 +1,4 @@
-﻿@model List<Chengdexy.CN.Models.BlogSketch>
+﻿@model List<Chengdexy.CN.ViewModels.BlogSketchVM>
 
 <!--内容列表-->
 <div class="row">
@@ -14,15 +14,15 @@
         var mod = Model[i];
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
             <div class="hidden-xs col-sm-3  col-md-2 col-lg-3">
-                <a href="" class="thumbnail"><img src="@mod.ImageFileName" alt="" /></a>
+                <a href="" class="thumbnail"><img src="@mod.BlogPageImagePath" alt="" /></a>
             </div>
             <div class="col-xs-12  col-sm-9 col-md-10 col-lg-9">
-                <h3>@mod.BlogCapital</h3>
-                <p class="text-muted">@mod.BlogDescribe</p>
-                <a href="@mod.BlogUrl" class="btn btn-default col-xs-3 col-xs-offset-9 col-sm-2 com-sm-offset-9 col-md-2 col-md-offset-9">详情...</a>
+                <h3>@mod.BlogPageTitle</h3>
+                <p class="text-muted">@mod.BlogPageSketch</p>
+                <a href="@Url.Action("Index","Show", new { ID = mod.BlogPageId })" class="btn btn-default col-xs-3 col-xs-offset-9 col-sm-2 com-sm-offset-9 col-md-2 col-md-offset-9">详情...</a>
             </div>
         </div>
         //列表项结束
     }
-    
+
 </div>

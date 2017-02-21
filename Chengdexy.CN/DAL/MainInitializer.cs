@@ -41,16 +41,60 @@ namespace Chengdexy.CN.DAL
             context.SaveChanges();
 
             //
-            // 初始化博客简述
+            // 初始化博文
 
-            var BlogSketchs = new List<BlogSketch>
+            var BlogPages = new List<BlogPage>
             {
-                new BlogSketch { BlogCapital="测试博客简述1",BlogDescribe="描述信息描述信息描述信息描述信息描述信息",BlogUrl="#",ImageFileName="default.jpg"},
-                new BlogSketch { BlogCapital="测试博客简述2",BlogDescribe="描述信息描述信息描述信息描述信息描述信息",BlogUrl="#",ImageFileName="default.jpg"},
-                new BlogSketch { BlogCapital="测试博客简述3",BlogDescribe="描述信息描述信息描述信息描述信息描述信息",BlogUrl="#",ImageFileName="default.jpg"},
-                new BlogSketch { BlogCapital="测试博客简述4",BlogDescribe="描述信息描述信息描述信息描述信息描述信息",BlogUrl="#",ImageFileName="default.jpg"}
+                new BlogPage
+                {
+                    Title ="测试博文1",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介1",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                },
+                new BlogPage
+                {
+                    Title ="测试博文2",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介2",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                },
+                new BlogPage
+                {
+                    Title ="测试博文3",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介3",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                },
+                new BlogPage
+                {
+                    Title ="测试博文4",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介4",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                },
+                new BlogPage
+                {
+                    Title ="测试博文5",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介5",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                },
+                new BlogPage
+                {
+                    Title ="测试博文6",
+                    CreateTime =DateTime.Now,
+                    Sketch="测试博文简介6",
+                    Content="测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本测试博文文本",
+                    ImagePath="img/default.jpg"
+                }
             };
-            BlogSketchs.ForEach(bs => context.BlogSketchs.Add(bs));
+            BlogPages.ForEach(bp => context.BlogPages.Add(bp));
             context.SaveChanges();
 
             //
