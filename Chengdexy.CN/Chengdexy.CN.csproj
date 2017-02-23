@@ -153,6 +153,7 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_PartialAdminSidebar.cshtml" />
     <Content Include="Views\Admin\AdminSettings.cshtml" />
+    <Content Include="Views\Admin\HomepageSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
