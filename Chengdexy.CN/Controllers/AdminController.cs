@@ -79,11 +79,11 @@ namespace Chengdexy.CN.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult ShowSidebar()
+        public ActionResult ShowSidebar(int index)
         {
             var itemList = db.AdminSidebarItems.ToList();
 
-            return PartialView("~/Views/Shared/_PartialAdminSidebar.cshtml", new SidebarItemVM(itemList, 1));
+            return PartialView("~/Views/Shared/_PartialAdminSidebar.cshtml", new SidebarItemVM(itemList, index));
         }
     }
 }
