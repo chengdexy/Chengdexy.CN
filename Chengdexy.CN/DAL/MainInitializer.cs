@@ -185,7 +185,7 @@ namespace Chengdexy.CN.DAL
                 new AdminSidebarItem { Text="主导航设置",Controller="NavbarSettings",Action="Index"},
                 new AdminSidebarItem { Text="编程作品管理",Controller="ProgramSettings",Action="Index"},
                 new AdminSidebarItem { Text="博客博文管理",Controller="BlogSettings",Action="Index"},
-                new AdminSidebarItem { Text="管理员账号管理",Controller="AdminSettings",Action="Index"},
+                new AdminSidebarItem { Text="管理员账号管理",Controller="Admin",Action="AdminSettings"},
             };
             adminSidebarItems.ForEach(asi => context.AdminSidebarItems.Add(asi));
             context.SaveChanges();
