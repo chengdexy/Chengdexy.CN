@@ -4,6 +4,7 @@ using Chengdexy.CN.Utils;
 using Chengdexy.CN.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
@@ -118,6 +119,33 @@ namespace Chengdexy.CN.Controllers
             //}
 
             return View(db.AboutItems.ToList());
+        }
+
+        //
+        // POST: Admin/UpdateAboutImage
+        [HttpPost]
+        public ActionResult UpdateAboutImage(HttpPostedFileBase image)
+        {
+            if (image != null && image.ContentLength > 0)
+            {
+                const string fileTypes = "gif,jpg,jpeg,png,bmp";
+                const int maxSize = 205000;
+                var imgPath = "~/Images/itsme.jpg";
+                if (image.ContentLength > maxSize)
+                {
+                    //超大
+                    return RedirectToAction("AboutSettings");
+                }
+                var fileExt = Path.GetExtension(image.FileName);
+                if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+                {
+                    //扩展名不匹配
+                    return RedirectToAction("AboutSettings");
+                }
+                image.SaveAs(Server.MapPath(imgPath));
+            }
+            return RedirectToAction("AboutSettings");
+
         }
 
         //

@@ -9,6 +9,33 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">"关于"页面设置</h1>
     <h3>头像图片设置:</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="~/Images/itsme.jpg" />
+            </a>
+        </div>
+    </div>
+    @using (Html.BeginForm("UpdateAboutImage", "Admin", FormMethod.Post,new { @class="form-inline",@enctype="multipart/form-data"}))
+    {
+        <!-- image-preview-filename input [CUT FROM HERE]-->
+        <div class="input-group image-preview">
+            <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+            <span class="input-group-btn">
+                <!-- image-preview-clear button -->
+                @*<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                    <span class="glyphicon glyphicon-remove"></span> 去除
+                </button>*@
+                <!-- image-preview-input -->
+                <div class="btn btn-default image-preview-input">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span class="image-preview-input-title">选择</span>
+                    <input type="file" accept="image/png, image/jpeg, image/gif" name="image" /> <!-- rename it -->
+                </div>
+            </span>
+        </div><!-- /input-group image-preview [TO HERE]-->
+        <button class="btn btn-default" type="submit">保存</button>
+    }
     <h3>说明项目设置:</h3>
     @Ajax.ActionLink("Add New", "AddAboutItem", "Admin", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "aboutEditor" }, new { @class = "btn btn-default btn-sm" })
     <div id="aboutEditor"></div>
@@ -39,3 +66,4 @@
         </table>
     </div>
 </div>
+

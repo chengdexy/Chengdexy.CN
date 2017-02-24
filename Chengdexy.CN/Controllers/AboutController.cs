@@ -17,7 +17,7 @@ namespace Chengdexy.CN.Controllers
         public ActionResult Index()
         {
             string imgTitle = "Now you know what's wild-programmer :P";
-            string imgUrl = "img/itsme.jpg";
+            string imgUrl = "/Images/itsme.jpg";
             var list = db.AboutItems.ToList();
             AboutItemVM aivm = new ViewModels.AboutItemVM(imgTitle, imgUrl, list );
             return View(aivm);
