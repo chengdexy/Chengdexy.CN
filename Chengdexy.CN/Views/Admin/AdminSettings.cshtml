@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-@Html.Action("ShowSidebar",new { index=8})
+@Html.Action("ShowSidebar", new { index = 8 })
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">重置管理员帐号、密码</h1>
@@ -14,21 +14,21 @@
         </div>
         <div class="form-group">
             <label for="inputPassword">原密码:</label>
-            <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Old Password" required >
+            <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Old Password" required>
         </div>
         <br />
-            <div class="form-group">
-                <label for="newAccount">新帐号:</label>
-                <input type="text" name="newAccount" id="newAccount" class="form-control" placeholder="New Account">
-            </div>
-            <div class="form-group">
-                <label for="newPassword">新密码:</label>
-                <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="New Password">
-            </div>
-            <div class="form-group">
-                <label for="newPasswordAgain">再输入一次新密码:</label>
-                <input type="password" name="newPasswordAgain" id="newPasswordAgain" class="form-control" placeholder="New Password Again">
-            </div>
+        <div class="form-group">
+            <label for="newAccount">新帐号:</label>
+            <input type="text" name="newAccount" id="newAccount" class="form-control" placeholder="New Account">
+        </div>
+        <div class="form-group">
+            <label for="newPassword">新密码:</label>
+            <input type="password" name="newPassword" id="newPassword" class="form-control" placeholder="New Password">
+        </div>
+        <div class="form-group">
+            <label for="newPasswordAgain">再输入一次新密码:</label>
+            <input type="password" name="newPasswordAgain" id="newPasswordAgain" class="form-control" placeholder="New Password Again">
+        </div>
             <button class="btn btn-primary btn-block" type="submit">确认</button>
     }
 </div>

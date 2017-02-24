@@ -109,6 +109,96 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
+        // GET: Admin/AboutSettings
+        public ActionResult AboutSettings()
+        {
+            //if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
+
+            return View(db.AboutItems.ToList());
+        }
+
+        //
+        // GET: Admin/AddAboutItem
+        public ActionResult AddAboutItem()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialAboutItemAdder.cshtml");
+            }
+            else
+            {
+                return RedirectToAction("AboutSettings");
+            }
+        }
+
+        //
+        // POST:Admin/AddAboutItem
+        [HttpPost]
+        public ActionResult AddAboutItem(FormCollection fc)
+        {
+            string text = fc["inputText"];
+            string value = fc["inputValue"];
+            db.AboutItems.Add(new AboutItem { Text = text, Value = value });
+            db.SaveChanges();
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // GET: Admin/DeleteAboutItem
+        public ActionResult DeleteAboutItem(int ID)
+        {
+            AboutItem ai = db.AboutItems.Find(ID);
+            if (ai != null)
+            {
+                db.AboutItems.Remove(ai);
+                db.SaveChanges();
+            }
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // GET: Admin/PreEdit
+        public ActionResult PreEditAboutItem(int ID)
+        {
+            AboutItem ai = db.AboutItems.Find(ID);
+            if (ai != null)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("~/Views/Admin/_PartialAboutItemEditor.cshtml", ai);
+                }
+            }
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // POST: Admin/EditAboutItem
+        [HttpPost]
+        public ActionResult EditAboutItem(FormCollection fc)
+        {
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            string Text = fc["inputText"];
+            string Value = fc["inputValue"];
+            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Value))
+            {
+                return View();
+            }
+            AboutItem ai = new AboutItem
+            {
+                ID = ID,
+                Text = Text,
+                Value = Value
+            };
+            db.Entry(ai).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("AboutSettings");
+
+        }
+
+        //
         // Child Only: Show the sidebar
         [ChildActionOnly]
         public ActionResult ShowSidebar(int index)

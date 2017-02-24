@@ -1,0 +1,41 @@
+﻿@model List<Chengdexy.CN.Models.AboutItem>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 4 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">"关于"页面设置</h1>
+    <h3>头像图片设置:</h3>
+    <h3>说明项目设置:</h3>
+    @Ajax.ActionLink("Add New", "AddAboutItem", "Admin", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "aboutEditor" }, new { @class = "btn btn-default btn-sm" })
+    <div id="aboutEditor"></div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Text</td>
+                    <td>Value</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].Text</td>
+                        <td>@Model[i].Value</td>
+                        <td>
+                            @Ajax.ActionLink("Edit", "PreEditAboutItem", new { ID = Model[i].ID }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "aboutEditor" })
+                            @Html.ActionLink("Delete", "DeleteAboutItem", new { ID = Model[i].ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

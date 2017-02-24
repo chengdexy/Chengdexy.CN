@@ -179,12 +179,12 @@ namespace Chengdexy.CN.DAL
             var adminSidebarItems = new List<AdminSidebarItem>
             {
                 new AdminSidebarItem {Text="后台首页",Controller="Admin",Action="Index" },
-                new AdminSidebarItem { Text="网站设置",Controller="WebsiteSettings",Action="Index"},
-                new AdminSidebarItem { Text="首页设置",Controller="HomepageSettings",Action="Index"},
-                new AdminSidebarItem { Text="关于页设置",Controller="AboutSettings",Action="Index"},
-                new AdminSidebarItem { Text="主导航设置",Controller="NavbarSettings",Action="Index"},
-                new AdminSidebarItem { Text="编程作品管理",Controller="ProgramSettings",Action="Index"},
-                new AdminSidebarItem { Text="博客博文管理",Controller="BlogSettings",Action="Index"},
+                new AdminSidebarItem { Text="网站设置",Controller="Admin",Action="WebsiteSettings"},
+                new AdminSidebarItem { Text="首页设置",Controller="Admin",Action="HomepageSettings"},
+                new AdminSidebarItem { Text="关于页设置",Controller="Admin",Action="AboutSettings"},
+                new AdminSidebarItem { Text="主导航设置",Controller="Admin",Action="NavbarSettings"},
+                new AdminSidebarItem { Text="编程作品管理",Controller="Admin",Action="ProgramSettings"},
+                new AdminSidebarItem { Text="博客博文管理",Controller="Admin",Action="BlogSettings"},
                 new AdminSidebarItem { Text="管理员账号管理",Controller="Admin",Action="AdminSettings"},
             };
             adminSidebarItems.ForEach(asi => context.AdminSidebarItems.Add(asi));
