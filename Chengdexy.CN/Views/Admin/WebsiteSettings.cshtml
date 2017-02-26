@@ -1,0 +1,39 @@
+﻿@model Chengdexy.CN.Models.MainSite
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 2 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">网站主属性设置</h1>
+    <h3>当前属性值:</h3>
+    <div class="alert alert-info">
+        <dl class="dl-horizontal" style="margin:auto;">
+            <dt>网站Title</dt>
+            <dd>@Model.TitleText</dd>
+            <dt>网站主标题</dt>
+            <dd>@Model.MainCapital</dd>
+            <dt>网站副标题</dt>
+            <dd>@Model.SubCapital</dd>
+        </dl>
+    </div>
+    <h3>变更属性值:</h3>
+    @using (Html.BeginForm("WebsiteSettings", "Admin", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label for="inputTitle">网站Title:</label>
+            <input type="text" name="inputTitle" value="@Model.TitleText" id="inputTitle" class="form-control" placeholder="Input Website's Title" required autofocus />
+        </div>
+        <div class="form-group">
+            <label for="inputMain">网站主标题:</label>
+            <input type="text" name="inputMain" value="@Model.MainCapital" id="inputMain" class="form-control" placeholder="Input Website's Main Capital" required />
+        </div>
+        <div class="form-group">
+            <label for="inputSub">网站副标题:</label>
+            <input type="text" name="inputSub" value="@Model.SubCapital" id="inputSub" class="form-control" placeholder="Input Website's Sub Capital" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">确认</button>
+    }
+</div>

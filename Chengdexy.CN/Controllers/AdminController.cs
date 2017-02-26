@@ -17,10 +17,11 @@ namespace Chengdexy.CN.Controllers
         private MainContext db = new MainContext();
 
         //
+        // Navbar Index: 1
         // GET: Admin
         public ActionResult Index()
         {
-            if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
+            if (!CheckLogin())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -32,10 +33,55 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
-        // GET: Admin/AdminSettings
-        public ActionResult AdminSettings()
+        // Navbar Index: 2
+        // GET: Admin/WebsiteSettings
+        public ActionResult WebsiteSettings()
         {
-            if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            MainSite ms = db.MainSites.FirstOrDefault();
+
+            return View(ms);
+        }
+
+        //
+        // Navbar Index: 2
+        // POST: Admin/WebsiteSettings
+        [HttpPost]
+        public ActionResult WebsiteSettings(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            string title = fc["inputTitle"];
+            string main = fc["inputMain"];
+            string sub = fc["inputSub"];
+            if (string.IsNullOrEmpty(title) | string.IsNullOrEmpty(main) | string.IsNullOrEmpty(sub))
+            {
+                //任意一项为空
+                return RedirectToAction("Index");
+            }
+
+            MainSite ms = db.MainSites.FirstOrDefault();
+            ms.TitleText = title;
+            ms.MainCapital = main;
+            ms.SubCapital = sub;
+            db.Entry(ms).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("WebsiteSettings");
+        }
+
+        //
+        // Navbar Index: 3
+        // GET: Admin/HomepageSettings
+        public ActionResult HomepageSettings()
+        {
+            if (!CheckLogin())
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -43,10 +89,202 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
+        // Navbar Index: 3
+        // POST: Admin/HomepageSettings
+        [HttpPost]
+        public ActionResult HomepageSettings(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (string.IsNullOrEmpty(fc["inputCapital"]) | string.IsNullOrEmpty(fc["inputDescribe"]) | string.IsNullOrEmpty(fc["buttonText"]) | string.IsNullOrEmpty(fc["buttonUrl"]))
+            {
+                //任何一项为空
+                return View();
+            }
+            Jumbotron jb = new Jumbotron()
+            {
+                Capital = fc["inputCapital"],
+                Describe = fc["inputDescribe"],
+                DownloadButtonText = fc["buttonText"],
+                DownloadUrl = fc["buttonUrl"]
+            };
+            db.Jumbotrons.Add(jb);
+            db.SaveChanges();
+            return View();
+        }
+
+        //
+        // Navbar Index: 4
+        // GET: Admin/AboutSettings
+        public ActionResult AboutSettings()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View(db.AboutItems.ToList());
+        }
+
+        //
+        // Navbar Index: 4
+        // POST: Admin/UpdateAboutImage
+        [HttpPost]
+        public ActionResult UpdateAboutImage(HttpPostedFileBase image)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (image != null && image.ContentLength > 0)
+            {
+                const string fileTypes = "gif,jpg,jpeg,png,bmp";
+                const int maxSize = 205000;
+                var imgPath = "~/Images/itsme.jpg";
+                if (image.ContentLength > maxSize)
+                {
+                    //超大
+                    return RedirectToAction("AboutSettings");
+                }
+                var fileExt = Path.GetExtension(image.FileName);
+                if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+                {
+                    //扩展名不匹配
+                    return RedirectToAction("AboutSettings");
+                }
+                image.SaveAs(Server.MapPath(imgPath));
+            }
+            return RedirectToAction("AboutSettings");
+
+        }
+
+        //
+        // Navbar Index: 4
+        // GET: Admin/AddAboutItem
+        public ActionResult AddAboutItem()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialAboutItemAdder.cshtml");
+            }
+            else
+            {
+                return RedirectToAction("AboutSettings");
+            }
+        }
+
+        //
+        // Navbar Index: 4
+        // POST:Admin/AddAboutItem
+        [HttpPost]
+        public ActionResult AddAboutItem(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string text = fc["inputText"];
+            string value = fc["inputValue"];
+            db.AboutItems.Add(new AboutItem { Text = text, Value = value });
+            db.SaveChanges();
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // Navbar Index: 4
+        // GET: Admin/DeleteAboutItem
+        public ActionResult DeleteAboutItem(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            AboutItem ai = db.AboutItems.Find(ID);
+            if (ai != null)
+            {
+                db.AboutItems.Remove(ai);
+                db.SaveChanges();
+            }
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // Navbar Index: 4
+        // GET: Admin/PreEditAboutItem
+        public ActionResult PreEditAboutItem(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            AboutItem ai = db.AboutItems.Find(ID);
+            if (ai != null)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("~/Views/Admin/_PartialAboutItemEditor.cshtml", ai);
+                }
+            }
+            return RedirectToAction("AboutSettings");
+        }
+
+        //
+        // Navbar Index: 4
+        // POST: Admin/EditAboutItem
+        [HttpPost]
+        public ActionResult EditAboutItem(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            string Text = fc["inputText"];
+            string Value = fc["inputValue"];
+            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Value))
+            {
+                return View();
+            }
+            AboutItem ai = new AboutItem
+            {
+                ID = ID,
+                Text = Text,
+                Value = Value
+            };
+            db.Entry(ai).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("AboutSettings");
+
+        }
+
+        //
+        // Navbar Index: 8
+        // GET: Admin/AdminSettings
+        public ActionResult AdminSettings()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        //
+        // Navbar Index: 8
         // POST: Admin/AdminSettings
         [HttpPost]
         public ActionResult AdminSettings(FormCollection fc)
         {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             string newAccount = fc["newAccount"];
             string newPassword = fc["newPassword"];
             string newPasswordAgain = fc["newPasswordAgain"];
@@ -77,156 +315,6 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
-        // GET: Admin/HomepageSettings
-        public ActionResult HomepageSettings()
-        {
-            if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            return View();
-        }
-
-        //
-        // POST: Admin/HomepageSettings
-        [HttpPost]
-        public ActionResult HomepageSettings(FormCollection fc)
-        {
-            if (string.IsNullOrEmpty(fc["inputCapital"]) | string.IsNullOrEmpty(fc["inputDescribe"]) | string.IsNullOrEmpty(fc["buttonText"]) | string.IsNullOrEmpty(fc["buttonUrl"]))
-            {
-                //任何一项为空
-                return View();
-            }
-            Jumbotron jb = new Jumbotron()
-            {
-                Capital = fc["inputCapital"],
-                Describe = fc["inputDescribe"],
-                DownloadButtonText = fc["buttonText"],
-                DownloadUrl = fc["buttonUrl"]
-            };
-            db.Jumbotrons.Add(jb);
-            db.SaveChanges();
-            return View();
-        }
-
-        //
-        // GET: Admin/AboutSettings
-        public ActionResult AboutSettings()
-        {
-            //if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-
-            return View(db.AboutItems.ToList());
-        }
-
-        //
-        // POST: Admin/UpdateAboutImage
-        [HttpPost]
-        public ActionResult UpdateAboutImage(HttpPostedFileBase image)
-        {
-            if (image != null && image.ContentLength > 0)
-            {
-                const string fileTypes = "gif,jpg,jpeg,png,bmp";
-                const int maxSize = 205000;
-                var imgPath = "~/Images/itsme.jpg";
-                if (image.ContentLength > maxSize)
-                {
-                    //超大
-                    return RedirectToAction("AboutSettings");
-                }
-                var fileExt = Path.GetExtension(image.FileName);
-                if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
-                {
-                    //扩展名不匹配
-                    return RedirectToAction("AboutSettings");
-                }
-                image.SaveAs(Server.MapPath(imgPath));
-            }
-            return RedirectToAction("AboutSettings");
-
-        }
-
-        //
-        // GET: Admin/AddAboutItem
-        public ActionResult AddAboutItem()
-        {
-            if (Request.IsAjaxRequest())
-            {
-                return PartialView("~/Views/Admin/_PartialAboutItemAdder.cshtml");
-            }
-            else
-            {
-                return RedirectToAction("AboutSettings");
-            }
-        }
-
-        //
-        // POST:Admin/AddAboutItem
-        [HttpPost]
-        public ActionResult AddAboutItem(FormCollection fc)
-        {
-            string text = fc["inputText"];
-            string value = fc["inputValue"];
-            db.AboutItems.Add(new AboutItem { Text = text, Value = value });
-            db.SaveChanges();
-            return RedirectToAction("AboutSettings");
-        }
-
-        //
-        // GET: Admin/DeleteAboutItem
-        public ActionResult DeleteAboutItem(int ID)
-        {
-            AboutItem ai = db.AboutItems.Find(ID);
-            if (ai != null)
-            {
-                db.AboutItems.Remove(ai);
-                db.SaveChanges();
-            }
-            return RedirectToAction("AboutSettings");
-        }
-
-        //
-        // GET: Admin/PreEdit
-        public ActionResult PreEditAboutItem(int ID)
-        {
-            AboutItem ai = db.AboutItems.Find(ID);
-            if (ai != null)
-            {
-                if (Request.IsAjaxRequest())
-                {
-                    return PartialView("~/Views/Admin/_PartialAboutItemEditor.cshtml", ai);
-                }
-            }
-            return RedirectToAction("AboutSettings");
-        }
-
-        //
-        // POST: Admin/EditAboutItem
-        [HttpPost]
-        public ActionResult EditAboutItem(FormCollection fc)
-        {
-            int ID = Convert.ToInt32(fc["hiddenID"]);
-            string Text = fc["inputText"];
-            string Value = fc["inputValue"];
-            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Value))
-            {
-                return View();
-            }
-            AboutItem ai = new AboutItem
-            {
-                ID = ID,
-                Text = Text,
-                Value = Value
-            };
-            db.Entry(ai).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("AboutSettings");
-
-        }
-
-        //
         // Child Only: Show the sidebar
         [ChildActionOnly]
         public ActionResult ShowSidebar(int index)
@@ -234,6 +322,17 @@ namespace Chengdexy.CN.Controllers
             var itemList = db.AdminSidebarItems.ToList();
 
             return PartialView("~/Views/Shared/_PartialAdminSidebar.cshtml", new SidebarItemVM(itemList, index));
+        }
+
+        //
+        // Private Method
+        private bool CheckLogin()
+        {
+            if (!(Session.Count > 0) || !((bool)Session["AdminLoggedIn"] == true))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
