@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Chengdexy is here</title>
+    <title>@Html.Action("SetSiteTitle", "Global")</title>
     <link rel="stylesheet" href="~/CSS/bootstrap.min.css">
     <link rel="shortcut icon" href="favicon.ico" />
     <style type="text/css">
@@ -27,8 +27,8 @@
         <!--头部-->
         <div class="page-header">
             <h1>
-                Hey, It's Chengdexy
-                <small>Welcome, it's all about me.</small>
+                @Html.Action("SetSiteMainCapital", "Global")
+                <small>@Html.Action("SetSiteSubCapital","Global")</small>
             </h1>
         </div>
         

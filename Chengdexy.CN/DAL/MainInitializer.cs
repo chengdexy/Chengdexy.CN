@@ -13,6 +13,19 @@ namespace Chengdexy.CN.DAL
     {
         protected override void Seed(MainContext context)
         {
+            #region 全局属性初始化
+            var MainSites = new List<MainSite>
+            {
+                new MainSite
+                {
+                    TitleText ="Chengdexy is here",
+                    MainCapital="Hey, It's Chengdexy",
+                    SubCapital="Welcome, it's all about me."
+                }
+            };
+            MainSites.ForEach(ms => context.MainSites.Add(ms));
+            context.SaveChanges();
+            #endregion
             #region 前台Models初始化
             //
             // 初始化导航条
