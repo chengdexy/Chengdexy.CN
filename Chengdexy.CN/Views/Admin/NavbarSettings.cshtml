@@ -1,0 +1,43 @@
+﻿@model List<Chengdexy.CN.Models.NavbarItem>
+
+@{
+    ViewBag.Title = "NavbarSettings";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 5 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">主导航项目管理</h1>
+    <h3>项目管理</h3>
+    @Ajax.ActionLink("Add New", "AddNavbarItem", "Admin", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "navbarEditor" }, new { @class = "btn btn-default btn-sm" })
+    <div id="navbarEditor"></div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Text</td>
+                    <td>Action</td>
+                    <td>Controller</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].Text</td>
+                        <td>@Model[i].Action</td>
+                        <td>@Model[i].Route</td>
+                        <td>
+                            @Ajax.ActionLink("Edit", "PreEditNavbarItem", new { ID = Model[i].ID }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "navbarEditor" })
+                            @Html.ActionLink("Delete", "DeleteNavbarItem", new { ID = Model[i].ID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

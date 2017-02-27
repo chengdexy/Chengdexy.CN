@@ -184,6 +184,9 @@
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Global\Index.cshtml" />
     <Content Include="Views\Admin\WebsiteSettings.cshtml" />
+    <Content Include="Views\Admin\NavbarSettings.cshtml" />
+    <Content Include="Views\Admin\_PartialNavbarItemAdder.cshtml" />
+    <Content Include="Views\Admin\_PartialNavbarItemEditor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

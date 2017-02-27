@@ -263,6 +263,125 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
+        // Navbar Index: 5
+        // GET: Admin/NavbarSettings
+        public ActionResult NavbarSettings()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            List<NavbarItem> list = db.NavbarItems.ToList();
+            return View(list);
+        }
+
+        //
+        // Navbar Index: 5
+        // GET: Admin/AddNavbarItem
+        public ActionResult AddNavbarItem()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialNavbarItemAdder.cshtml");
+            }
+            else
+            {
+                return RedirectToAction("NavbarSettings");
+            }
+        }
+
+        //
+        // Navbar Index: 5
+        // POST:Admin/AddNavbarItem
+        [HttpPost]
+        public ActionResult AddNavbarItem(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string text = fc["inputText"];
+            string action = fc["inputAction"];
+            string ctrl = fc["inputController"];
+            db.NavbarItems.Add(new NavbarItem { Text = text, Action = action, Route = ctrl });
+            db.SaveChanges();
+            return RedirectToAction("NavbarSettings");
+        }
+
+        //
+        // Navbar Index: 5
+        // GET: Admin/DeleteNavbarItem
+        public ActionResult DeleteNavbarItem(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            NavbarItem ni = db.NavbarItems.Find(ID);
+            if (ni != null)
+            {
+                db.NavbarItems.Remove(ni);
+                db.SaveChanges();
+            }
+            return RedirectToAction("NavbarSettings");
+        }
+
+        //
+        // Navbar Index: 5
+        // GET: Admin/PreEditNavbarItem
+        public ActionResult PreEditNavbarItem(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            NavbarItem ni = db.NavbarItems.Find(ID);
+            if (ni != null)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("~/Views/Admin/_PartialNavbarItemEditor.cshtml", ni);
+                }
+            }
+            return RedirectToAction("NavbarSettings");
+        }
+
+        //
+        // Navbar Index: 5
+        // POST: Admin/EditNavbarItem
+        [HttpPost]
+        public ActionResult EditNavbarItem(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            string Text = fc["inputText"];
+            string Action = fc["inputAction"];
+            string Ctrl = fc["inputController"];
+            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Action)|string.IsNullOrEmpty(Ctrl))
+            {
+                return View();
+            }
+            NavbarItem ni = new NavbarItem
+            {
+                ID = ID,
+                Text = Text,
+                Action=Action,
+                Route=Ctrl
+            };
+            db.Entry(ni).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("NavbarSettings");
+
+        }
+
+        //
         // Navbar Index: 8
         // GET: Admin/AdminSettings
         public ActionResult AdminSettings()

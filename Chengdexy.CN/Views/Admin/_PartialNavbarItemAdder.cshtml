@@ -1,0 +1,17 @@
+﻿@using (Html.BeginForm("AddNavbarItem", "Admin", FormMethod.Post, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label for="inputText">Text</label>
+        <input type="text" class="form-control" id="inputText" name="inputText" placeholder="Input Text" />
+    </div>
+    <div class="form-group">
+        <label for="inputAction">Action</label>
+        <input type="text" class="form-control" id="inputAction" name="inputAction" placeholder="Input Action" />
+    </div>
+    <div class="form-group">
+        <label for="inputController">Controller</label>
+        <input type="text" class="form-control" id="inputController" name="inputController" placeholder="Input Controller" />
+    </div>
+    <button class="btn btn-default" type="submit">更新</button>
+}
+
