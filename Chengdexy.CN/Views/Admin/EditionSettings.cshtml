@@ -1,0 +1,43 @@
+﻿@model List<Chengdexy.CN.Models.ProgramEdition>
+
+@{
+    ViewBag.Title = "EditionSettings";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 6 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">版本管理: @Model[0].Program.Ename</h1>
+    <div>
+        @Html.ActionLink("Go Back", "ProgramSettings", null, new { @class = "btn btn-default btn-sm" })
+        @Ajax.ActionLink("Add New", "AddProgramEdition", new { programID = Model[0].ProgramID }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "editionEditor" }, new { @class = "btn btn-default btn-sm" })
+    </div>
+    <div id="editionEditor"></div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Publish Date</td>
+                    <td>Edition</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].PublishDate.ToString("yyyy年MM月dd日")</td>
+                        <td>@Model[i].EditionString</td>
+                        <td>
+                            @Ajax.ActionLink("Edit", "PreEditProgramEdition", new { ID = Model[i].ID, programID = Model[i].ProgramID }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "editionEditor" })
+                            @Html.ActionLink("Delete", "DeleteProgramEdition", new { ID = Model[i].ID, programID = Model[i].ProgramID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

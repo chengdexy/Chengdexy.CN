@@ -576,6 +576,139 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
+        // Navbar Index: null
+        // GET: Admin/EditonSettings
+        public ActionResult EditionSettings(int programID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var editionList = db.ProgramEditions.Where(pe => pe.ProgramID == programID).ToList();
+            return View(editionList);
+        }
+
+        //
+        // Navbar Index: null
+        // GET: Admin/AddProgramEdition
+        public ActionResult AddProgramEdition(int programID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialProgramEditionAdder.cshtml", db.Programs.Find(programID));
+            }
+            else
+            {
+                return RedirectToAction("EditionSettings", new { programID = programID });
+            }
+        }
+
+        //
+        // Navbar Index: null
+        // POST:Admin/AddProgramEdition
+        [HttpPost]
+        public ActionResult AddProgramEdition(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            int programID = Convert.ToInt32(fc["hiddenID"]);
+            DateTime publish = Convert.ToDateTime(fc["inputDate"]);
+            string edStr = fc["inputEditionString"];
+            string dUrl = fc["inputDownloadUrl"];
+            db.Programs.Find(programID).ProgramEditions.Add(
+                    new ProgramEdition
+                    {
+                        PublishDate = publish,
+                        EditionString = edStr,
+                        DownloadUrl = dUrl
+                    }
+            );
+            db.SaveChanges();
+            return RedirectToAction("EditionSettings", new { programID = programID });
+        }
+
+        //
+        // Navbar Index: null
+        // GET: Admin/DeleteProgramEdition
+        public ActionResult DeleteProgramEdition(int ID, int programID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ProgramEdition pe = db.ProgramEditions.Find( ID);
+            if (pe != null && db.ProgramEditions.Where(p=>p.ProgramID==programID).Count() > 1)
+            {
+                db.ProgramEditions.Remove(pe);
+                db.SaveChanges();
+            }
+            return RedirectToAction("EditionSettings", new { programID = programID });
+        }
+
+        //
+        // Navbar Index: null
+        // GET: Admin/PreEditProgramEdition
+        public ActionResult PreEditProgramEdition(int ID, int programID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ProgramEdition pe = db.Programs.Find(programID).ProgramEditions.Find(pp => pp.ID == ID);
+            if (pe != null)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("~/Views/Admin/_PartialProgramEditionEditor.cshtml", pe);
+                }
+            }
+            return RedirectToAction("EditionSettings", new { programID = programID });
+        }
+
+        //
+        // Navbar Index: null
+        // POST: Admin/EditProgramEdition
+        [HttpPost]
+        public ActionResult EditProgramEdition(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            int programID = Convert.ToInt32(fc["hiddenProgramID"]);
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            DateTime publish = Convert.ToDateTime(fc["inputDate"]);
+            string edStr = fc["inputEditionString"];
+            string dUrl = fc["inputDownloadUrl"];
+            if (string.IsNullOrEmpty(edStr) | string.IsNullOrEmpty(dUrl))
+            {
+                return View();
+            }
+            ProgramEdition pe = new ProgramEdition
+            {
+                ID = ID,
+                ProgramID = programID,
+                PublishDate = publish,
+                EditionString = edStr,
+                DownloadUrl = dUrl
+            };
+
+            db.Entry(pe).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("EditionSettings", new { programID = programID });
+
+        }
+
+
+        //
         // Child Only: Show the sidebar
         [ChildActionOnly]
         public ActionResult ShowSidebar(int index)

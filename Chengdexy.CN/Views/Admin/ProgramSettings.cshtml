@@ -32,6 +32,7 @@
                         <td>
                             @Ajax.ActionLink("Edit", "PreEditProgram", new { ID = Model[i].ID }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "programEditor" })
                             @Html.ActionLink("Delete", "DeleteProgram", new { ID = Model[i].ID })
+                            @Html.ActionLink("Editions", "EditionSettings", new { programID=Model[i].ID})
                         </td>
                     </tr>
                 }
