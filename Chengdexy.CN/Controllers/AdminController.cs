@@ -364,7 +364,7 @@ namespace Chengdexy.CN.Controllers
             string Text = fc["inputText"];
             string Action = fc["inputAction"];
             string Ctrl = fc["inputController"];
-            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Action)|string.IsNullOrEmpty(Ctrl))
+            if (string.IsNullOrEmpty(Text) | string.IsNullOrEmpty(Action) | string.IsNullOrEmpty(Ctrl))
             {
                 return View();
             }
@@ -372,14 +372,156 @@ namespace Chengdexy.CN.Controllers
             {
                 ID = ID,
                 Text = Text,
-                Action=Action,
-                Route=Ctrl
+                Action = Action,
+                Route = Ctrl
             };
             db.Entry(ni).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("NavbarSettings");
 
         }
+
+        //
+        // Navbar Index: 6
+        // GET: Admin/ProgramSettings
+        public ActionResult ProgramSettings()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var programList = db.Programs.ToList();
+            return View(programList);
+        }
+
+        //
+        // Navbar Index: 6
+        // GET: Admin/AddProgram
+        public ActionResult AddProgram()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialProgramAdder.cshtml");
+            }
+            else
+            {
+                return RedirectToAction("ProgramSettings");
+            }
+        }
+
+        //
+        // Navbar Index: 6
+        // POST:Admin/AddProgram
+        [HttpPost]
+        public ActionResult AddProgram(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            string ename = fc["inputEname"];
+            string cname = fc["inputCname"];
+            string motive = fc["inputMotive"];
+            string describe = fc["inputDescribe"];
+            DateTime publish = DateTime.Now;
+            string edStr = fc["inputEditionString"];
+            string dUrl = fc["inputDownloadUrl"];
+            db.Programs.Add(new Program
+            {
+                Ename = ename,
+                Cname = cname,
+                Motive = motive,
+                Describe = describe,
+                ProgramEditions = new List<ProgramEdition>
+                {
+                    new ProgramEdition
+                    {
+                        PublishDate=publish,
+                        EditionString=edStr,
+                        DownloadUrl=dUrl
+                    }
+                }
+            });
+            db.SaveChanges();
+            return RedirectToAction("ProgramSettings");
+        }
+
+        //
+        // Navbar Index: 6
+        // GET: Admin/DeleteProgram
+        public ActionResult DeleteProgram(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            Program p = db.Programs.Find(ID);
+            if (p != null)
+            {
+                db.Programs.Remove(p);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ProgramSettings");
+        }
+
+        //
+        // Navbar Index: 6
+        // GET: Admin/PreEditProgram
+        public ActionResult PreEditProgram(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            Program p = db.Programs.Find(ID);
+            if (p != null)
+            {
+                if (Request.IsAjaxRequest())
+                {
+                    return PartialView("~/Views/Admin/_PartialProgramEditor.cshtml", p);
+                }
+            }
+            return RedirectToAction("ProgramSettings");
+        }
+
+        //
+        // Navbar Index: 6
+        // POST: Admin/EditProgram
+        [HttpPost]
+        public ActionResult EditProgram(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            string Ename = fc["inputEname"];
+            string Cname = fc["inputCname"];
+            string Motive = fc["inputMotive"];
+            string Describe = fc["inputDescribe"];
+            if (string.IsNullOrEmpty(Ename) | string.IsNullOrEmpty(Cname) | string.IsNullOrEmpty(Motive) | string.IsNullOrEmpty(Describe))
+            {
+                return View();
+            }
+            Program p = new Program
+            {
+                ID = ID,
+                Ename = Ename,
+                Cname = Cname,
+                Motive = Motive,
+                Describe = Describe
+            };
+            db.Entry(p).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("ProgramSettings");
+
+        }
+
 
         //
         // Navbar Index: 8

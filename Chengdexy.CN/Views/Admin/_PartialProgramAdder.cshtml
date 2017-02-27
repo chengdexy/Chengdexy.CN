@@ -1,0 +1,30 @@
+﻿@using (Html.BeginForm("AddProgram", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="inputEname">English Name</label>
+        <input type="text" class="form-control" id="inputEname" name="inputEname" placeholder="Input Ename" />
+    </div>
+    <div class="form-group">
+        <label for="inputCname">Chinese Name</label>
+        <input type="text" class="form-control" id="inputCname" name="inputCname" placeholder="Input Cname" />
+    </div>
+    <div class="form-group">
+        <label for="inputMotive">Motive</label>
+        <textarea class="form-control" id="inputMotive" name="inputMotive" placeholder="Input Motive" />
+    </div>
+    <div class="form-group">
+        <label for="inputDescribe">Function List</label>
+        <textarea class="form-control" id="inputDescribe" name="inputDescribe" placeholder="Input Functions, one funciton every line." />
+    </div>
+    <div class="form-group">
+        <label for="inputEditionString">Edition</label>
+        <input type="text" class="form-control" id="inputEditionString" name="inputEditionString" placeholder="Input Edition String" />
+    </div>
+    <div class="form-group">
+        <label for="inputDownloadUrl">Download Url</label>
+        <input type="text" class="form-control" id="inputDownloadUrl" name="inputDownloadUrl" placeholder="Input Download Url" />
+    </div>
+    <button class="btn btn-default" type="submit">发布</button>
+}
+
+

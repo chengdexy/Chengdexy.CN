@@ -1,0 +1,25 @@
+﻿@model Chengdexy.CN.Models.Program
+
+@using (Html.BeginForm("EditProgram", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="inputEname">English Name</label>
+        <input type="text" class="form-control" id="inputEname" name="inputEname" value="@Model.Ename" placeholder="Input Ename" />
+    </div>
+    <div class="form-group">
+        <label for="inputCname">Chinese Name</label>
+        <input type="text" class="form-control" id="inputCname" name="inputCname" value="@Model.Cname" placeholder="Input Cname" />
+    </div>
+    <div class="form-group">
+        <label for="inputMotive">Motive</label>
+        <textarea class="form-control" id="inputMotive" name="inputMotive" placeholder="Input Motive">@Model.Motive</textarea>
+    </div>
+    <div class="form-group">
+        <label for="inputDescribe">Function List</label>
+        <textarea class="form-control" id="inputDescribe" name="inputDescribe" placeholder="Input Functions, one function every line." >@Model.Describe</textarea>
+    </div>
+    <button class="btn btn-default" type="submit">更新</button>
+    <input type="text" class="hidden" id="hiddenID" name="hiddenID" value="@Model.ID" />
+}
+
+
