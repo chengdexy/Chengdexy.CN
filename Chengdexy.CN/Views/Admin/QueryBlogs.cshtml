@@ -1,0 +1,56 @@
+﻿@model List<Chengdexy.CN.Models.BlogPage>
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 7 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">查询结果</h1>
+    @using (Html.BeginForm("QueryBlogs", "Admin", null, FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="form-group">
+            <label for="inputKey" class="sr-only">Keys</label>
+            <input type="text" id="inputKey" name="inputKey" class="form-control" placeholder="Input Keys for Query" autofocus />
+        </div>
+        <button type="submit" class="btn btn-default">查询</button>
+    }
+    <h3>查询结果列表:</h3>
+    @if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Title</td>
+                        <td>Create Date</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                {
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@Model[i].Title</td>
+                            <td>@Model[i].CreateTime</td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditBlog", new { ID = Model[i].ID })
+                                @Html.ActionLink("Delete", "DeleteBlog", new { ID = Model[i].ID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p class="text-danger">没有找到任何符合查询条件的博客文章.</p>
+        </div>
+    }
+
+</div>

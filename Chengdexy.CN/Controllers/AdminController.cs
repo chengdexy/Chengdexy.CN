@@ -679,6 +679,47 @@ namespace Chengdexy.CN.Controllers
         }
 
         //
+        // Navbar Index: 7
+        // GET: Admin/DeleteBlog
+        public ActionResult DeleteBlog(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var bp = db.BlogPages.Find(ID);
+            if (bp != null)
+            {
+                db.BlogPages.Remove(bp);
+                db.SaveChanges();
+            }
+            return RedirectToAction("BlogSettings");
+        }
+
+        //
+        // Navbar Index: 7
+        // POST: Admin/QueryBlogs
+        [HttpPost]
+        public ActionResult QueryBlogs(FormCollection fc)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            string key = fc["inputKey"];
+            if (string.IsNullOrEmpty(key))
+            {
+                return RedirectToAction("BlogSettings");
+            }
+
+            var blogs = db.BlogPages.Where(
+                b => b.Title.IndexOf(key) >= 0 || b.Sketch.IndexOf(key) >= 0 || b.Content.IndexOf(key) >= 0
+            ).ToList();
+            return View(blogs);
+        }
+
+        //
         // Navbar Index: 8
         // GET: Admin/AdminSettings
         public ActionResult AdminSettings()

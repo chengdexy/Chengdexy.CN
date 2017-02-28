@@ -199,6 +199,7 @@
     <Content Include="Views\Admin\BlogSettings.cshtml" />
     <Content Include="Views\Admin\AddNewBlog.cshtml" />
     <Content Include="Views\Admin\EditBlog.cshtml" />
+    <Content Include="Views\Admin\QueryBlogs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
