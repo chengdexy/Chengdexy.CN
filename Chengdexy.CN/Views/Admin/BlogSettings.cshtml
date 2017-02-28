@@ -36,8 +36,8 @@
                         <td>@Model[i].Title</td>
                         <td>@Model[i].CreateTime</td>
                         <td>
-                            @Html.ActionLink("Edit", "EditBlog")
-                            @Html.ActionLink("Delete", "DeleteBlog")
+                            @Html.ActionLink("Edit", "EditBlog", new { ID = Model[i].ID })
+                            @Html.ActionLink("Delete", "DeleteBlog", new { ID = Model[i].ID })
                         </td>
                     </tr>
                 }

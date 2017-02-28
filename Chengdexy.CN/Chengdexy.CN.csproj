@@ -198,6 +198,7 @@
     <Content Include="Views\Admin\_PartialProgramEditionEditor.cshtml" />
     <Content Include="Views\Admin\BlogSettings.cshtml" />
     <Content Include="Views\Admin\AddNewBlog.cshtml" />
+    <Content Include="Views\Admin\EditBlog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

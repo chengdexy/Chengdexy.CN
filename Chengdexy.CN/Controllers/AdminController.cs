@@ -564,7 +564,7 @@ namespace Chengdexy.CN.Controllers
             //string imageInput = fc["image"];
             string content = fc["inputContent"];
             string imgPath = "";
-            if (string.IsNullOrEmpty(title) | string.IsNullOrEmpty(summary) | image==null | string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(title) | string.IsNullOrEmpty(summary) | image == null | string.IsNullOrEmpty(content))
             {
                 return View();
             }
@@ -598,6 +598,81 @@ namespace Chengdexy.CN.Controllers
                 Content = content
             };
             db.BlogPages.Add(bp);
+            db.SaveChanges();
+
+            return RedirectToAction("BlogSettings");
+        }
+
+        //
+        // Navbar Index: 7
+        // GET: Admin/EditBlog
+        public ActionResult EditBlog(int ID)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var blog = db.BlogPages.Find(ID);
+            return View(blog);
+        }
+
+        //
+        // Navbar Index: 7
+        // POST: Admin/EditBlog
+        [HttpPost]
+        public ActionResult EditBlog(FormCollection fc, HttpPostedFileBase image)
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //验证
+            int ID = Convert.ToInt32(fc["hiddenID"]);
+            string title = fc["inputTitle"];
+            string summary = fc["inputSketch"];
+            //string imageInput = fc["image"];
+            string content = fc["inputContent"];
+            string imgPath = "";
+            if (string.IsNullOrEmpty(title) | string.IsNullOrEmpty(summary) | string.IsNullOrEmpty(content))
+            {
+                return View();
+            }
+            //保存图片
+            if (image != null && image.ContentLength > 0)
+            {
+                const string fileTypes = "gif,jpg,jpeg,png,bmp";
+                const int maxSize = 205000;
+                string fileName = Guid.NewGuid().ToString();
+                imgPath = $"/Images/{fileName}.jpg";
+                if (image.ContentLength > maxSize)
+                {
+                    //超大
+                    return RedirectToAction("AboutSettings");
+                }
+                var fileExt = Path.GetExtension(image.FileName);
+                if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+                {
+                    //扩展名不匹配
+                    return RedirectToAction("AboutSettings");
+                }
+                image.SaveAs(Server.MapPath(imgPath));
+            }
+            //保存文章
+            var bp = db.BlogPages.Find(ID);
+            if (bp != null)
+            {
+                //ID号存在
+                bp.Title = title;
+                bp.Sketch = summary;
+                bp.CreateTime = DateTime.Now;
+                bp.Content = content;
+                if (imgPath != "")
+                {
+                    bp.ImagePath = imgPath;
+                }
+            }
+            db.Entry(bp).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
             return RedirectToAction("BlogSettings");
