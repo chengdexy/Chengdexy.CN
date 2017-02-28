@@ -578,13 +578,13 @@ namespace Chengdexy.CN.Controllers
                 if (image.ContentLength > maxSize)
                 {
                     //超大
-                    return RedirectToAction("AboutSettings");
+                    return RedirectToAction("AddNewBlog");
                 }
                 var fileExt = Path.GetExtension(image.FileName);
                 if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
                 {
                     //扩展名不匹配
-                    return RedirectToAction("AboutSettings");
+                    return RedirectToAction("AddNewBlog");
                 }
                 image.SaveAs(Server.MapPath(imgPath));
             }
@@ -648,13 +648,13 @@ namespace Chengdexy.CN.Controllers
                 if (image.ContentLength > maxSize)
                 {
                     //超大
-                    return RedirectToAction("AboutSettings");
+                    return RedirectToAction("EditBlog", new { ID = ID });
                 }
                 var fileExt = Path.GetExtension(image.FileName);
                 if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
                 {
                     //扩展名不匹配
-                    return RedirectToAction("AboutSettings");
+                    return RedirectToAction("EditBlog", new { ID = ID });
                 }
                 image.SaveAs(Server.MapPath(imgPath));
             }
