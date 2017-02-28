@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Action("ShowSidebar", new { index = 7 })
+
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">写博客</h1>
+    @using (Html.BeginForm("AddNewBlog", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="inputTitle">Title</label>
+            <input type="text" class="form-control" id="inputTitle" name="inputTitle" placeholder="Input Title" required autofocus />
+        </div>
+        <div class="form-group">
+            <label for="inputSketch">Summary</label>
+            <textarea class="form-control" rows="3" id="inputSketch" name="inputSketch" placeholder="Input Summary Here..." required></textarea>
+        </div>
+        <label for="imageInHome">Image In Home</label>
+        <div class="form-group input-group image-preview col-md-6">
+            <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+            <span class="input-group-btn">
+                <!-- image-preview-input -->
+                <div class="btn btn-default image-preview-input">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <span class="image-preview-input-title">选择</span>
+                    <input type="file" accept="image/png, image/jpeg, image/gif" name="image" /> <!-- rename it -->
+                </div>
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="inputContent">Blog Content</label>
+            <textarea class="form-control" rows="20" id="inputContent" name="inputContent" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">提交</button>
+        @Html.ActionLink("预览", "PreviewBlog", null, new { @class = "btn btn-default", @roll = "button" })
+        @Html.ActionLink("返回博文列表", "BlogSettings", null, new { @class = "btn btn-default", @roll = "button", @style = "margin-left:4px;" })
+    }
+</div>

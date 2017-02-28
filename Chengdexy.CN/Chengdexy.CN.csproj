@@ -148,7 +148,7 @@
     <Compile Include="Models\AboutItem.cs" />
     <Compile Include="Models\AdminAccount.cs" />
     <Compile Include="Models\AdminSidebarItem.cs" />
-    <Compile Include="Models\BlogDetail.cs" />
+    <Compile Include="Models\BlogPage.cs" />
     <Compile Include="Models\Jumbotron.cs" />
     <Compile Include="Models\MainSite.cs" />
     <Compile Include="Models\Program.cs" />
@@ -196,6 +196,8 @@
     <Content Include="Views\Admin\EditionSettings.cshtml" />
     <Content Include="Views\Admin\_PartialProgramEditionAdder.cshtml" />
     <Content Include="Views\Admin\_PartialProgramEditionEditor.cshtml" />
+    <Content Include="Views\Admin\BlogSettings.cshtml" />
+    <Content Include="Views\Admin\AddNewBlog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

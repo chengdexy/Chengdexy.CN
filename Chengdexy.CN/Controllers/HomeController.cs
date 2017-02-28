@@ -22,6 +22,7 @@ namespace Chengdexy.CN.Controllers
         public ActionResult ShowJumbotron()
         {
             var jumbotron = db.Jumbotrons.OrderByDescending(p => p.ID).FirstOrDefault();
+
             return PartialView("~/Views/Shared/_PartialJumbotron.cshtml", jumbotron);
         }
 
