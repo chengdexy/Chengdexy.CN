@@ -540,10 +540,10 @@ namespace Chengdexy.CN.Controllers
         // GET: Admin/AddNewBlog
         public ActionResult AddNewBlog()
         {
-            //if (!CheckLogin())
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
             return View();
         }

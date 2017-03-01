@@ -13,17 +13,15 @@
         testEditor = editormd("inputMD", {
             height: 640,
             syncScrolling: "single",
-            path: "../lib/",
+            path: "@HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)/lib/",
             saveHTMLTOTextarea: true,
             //toolbar: false,
-            toolbarIcons:function(){
-                return ["watch"]
-            },
-            toolbarIconsClass:{
-                watch: "fa-gears"
-            },
-            toolbarIconsTexts: {
-                watch :"预览"
+            toolbarIcons: function () {
+                return [
+                    "undo", "redo", "|",
+                    "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                    "watch"
+                ]
             }
         });
     });

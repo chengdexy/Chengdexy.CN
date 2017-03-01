@@ -107,8 +107,13 @@
     <Content Include="CSS\editormd.css" />
     <Content Include="CSS\login.css" />
     <Content Include="CSS\uppreview.css" />
+    <Content Include="fonts\editormd-logo.svg" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\loading%402x.gif" />
+    <Content Include="Images\loading%403x.gif" />
+    <Content Include="Images\loading.gif" />
     <Content Include="JS\bootstrap-datetimepicker.js" />
     <Content Include="JS\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="JS\bootstrap.min.js" />
@@ -123,6 +128,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\editormd-logo.eot" />
+    <Content Include="fonts\editormd-logo.ttf" />
+    <Content Include="fonts\editormd-logo.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\123.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -212,7 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\logos\" />
     <Folder Include="lib\" />
   </ItemGroup>
   <PropertyGroup>
