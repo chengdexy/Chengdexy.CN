@@ -9,7 +9,18 @@
             <p class="text-muted"><i>@program.Motive</i></p>
             <strong>@program.Ename 目前支持</strong>
             <div>
-                @program.Describe
+                <ul>
+                    @{
+                        string[] describes = program.Describe.Replace("\r\n", "\n").Split('\n');
+                        for (int i = 0; i < describes.Length; i++)
+                        {
+                            if (!string.IsNullOrEmpty(describes[i]))
+                            {
+                                <li>@describes[i]</li>
+                            }
+                        }
+                    }
+                </ul>
             </div>
         </div>
         <!--Table-->
@@ -27,5 +38,4 @@
 
         </table>
     </div>
-}
-
+                    }
