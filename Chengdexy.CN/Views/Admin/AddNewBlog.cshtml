@@ -5,6 +5,30 @@
 
 @Html.Action("ShowSidebar", new { index = 7 })
 
+<link href="~/CSS/editormd.css" rel="stylesheet" />
+<script src="~/JS/editormd.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    $(function () {
+        testEditor = editormd("inputMD", {
+            height: 640,
+            syncScrolling: "single",
+            path: "../lib/",
+            saveHTMLTOTextarea: true,
+            //toolbar: false,
+            toolbarIcons:function(){
+                return ["watch"]
+            },
+            toolbarIconsClass:{
+                watch: "fa-gears"
+            },
+            toolbarIconsTexts: {
+                watch :"预览"
+            }
+        });
+    });
+</script>
+
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">写博客</h1>
     @using (Html.BeginForm("AddNewBlog", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -30,12 +54,11 @@
             </span>
         </div>
         <div class="form-group">
-            <label for="inputContent">Blog Content</label>
-            <textarea class="form-control" rows="20" id="inputContent" name="inputContent" required></textarea>
+            <label for="inputMD">Blog Content</label>
+            <div id="inputMD"></div>
         </div>
         <button type="submit" class="btn btn-primary">提交</button>
-        @Html.ActionLink("预览", "PreviewBlog", null, new { @class = "btn btn-default", @roll = "button" })
+        @*@Html.ActionLink("预览", "PreviewBlog", null, new { @class = "btn btn-default", @roll = "button" })*@
         @Html.ActionLink("返回博文列表", "BlogSettings", null, new { @class = "btn btn-default", @roll = "button", @style = "margin-left:4px;" })
     }
-    <textarea id="test">### 123</textarea>
 </div>

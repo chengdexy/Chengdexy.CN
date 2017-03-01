@@ -6,14 +6,34 @@
 
 @Html.Action("ShowNavbar","Blogs")
 <!--内容部分-->
+<link href="~/CSS/editormd.css" rel="stylesheet" />
+<script src="~/lib/marked.min.js"></script>
+<script src="~/lib/prettify.min.js"></script>
+<script src="~/lib/raphael.min.js"></script>
+<script src="~/lib/underscore.min.js"></script>
+<script src="~/lib/sequence-diagram.min.js"></script>
+<script src="~/lib/flowchart.min.js"></script>
+<script src="~/lib/jquery.flowchart.min.js"></script>
+<script src="~/JS/editormd.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var wordsView;
+        wordsView = editormd.markdownToHTML("showMD", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true
+        });
+
+    })
+</script>
 <div class="content">
     <h1>@Model.Title<br /><small class="pull-right">@Model.CreateTime.ToString("yyyy年MM月dd日")</small></h1>
     <hr />
     <blockquote>
         <p>@Model.Sketch</p>
     </blockquote>
-    <div>
-        @Model.Content
+    <div id="showMD">
+        <textarea style="display:none;" name="editormd-markdown-doc">@Model.Content</textarea>
     </div>
 </div>
 
