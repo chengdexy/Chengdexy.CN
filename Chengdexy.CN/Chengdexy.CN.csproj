@@ -104,6 +104,7 @@
     <Content Include="CSS\base.css" />
     <Content Include="CSS\bootstrap-datetimepicker.min.css" />
     <Content Include="CSS\bootstrap.min.css" />
+    <Content Include="CSS\editormd.css" />
     <Content Include="CSS\login.css" />
     <Content Include="CSS\uppreview.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -111,6 +112,7 @@
     <Content Include="JS\bootstrap-datetimepicker.js" />
     <Content Include="JS\bootstrap-datetimepicker.zh-CN.js" />
     <Content Include="JS\bootstrap.min.js" />
+    <Content Include="JS\editormd.js" />
     <Content Include="JS\jquery.js" />
     <Content Include="JS\uppreview.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -210,6 +212,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="lib\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
