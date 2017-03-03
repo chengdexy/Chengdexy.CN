@@ -632,7 +632,7 @@ namespace Chengdexy.CN.Controllers
             string title = fc["inputTitle"];
             string summary = fc["inputSketch"];
             //string imageInput = fc["image"];
-            string content = fc["inputContent"];
+            string content = fc["inputMD-markdown-doc"];
             string imgPath = "";
             if (string.IsNullOrEmpty(title) | string.IsNullOrEmpty(summary) | string.IsNullOrEmpty(content))
             {
