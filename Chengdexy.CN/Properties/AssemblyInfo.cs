@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Chengdexy.CN")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("china")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Chengdexy.CN")]
-[assembly: AssemblyCopyright("Copyright © china 2017")]
+[assembly: AssemblyCopyright("Copyright © Chengdexy 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
