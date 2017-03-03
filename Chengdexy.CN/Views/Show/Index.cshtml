@@ -19,7 +19,7 @@
     $(document).ready(function() {
         var wordsView;
         wordsView = editormd.markdownToHTML("showMD", {
-            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            htmlDecode      : false,  // you can filter tags decode
             emoji           : true,
             taskList        : true
         });
