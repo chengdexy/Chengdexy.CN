@@ -551,7 +551,7 @@ namespace Chengdexy.CN.Controllers
         //
         // Navbar Index: 7
         // POST: Admin/AddNewBlog
-        [HttpPost]
+        [HttpPost,ValidateInput(false)]
         public ActionResult AddNewBlog(FormCollection fc, HttpPostedFileBase image)
         {
             if (!CheckLogin())
@@ -620,7 +620,7 @@ namespace Chengdexy.CN.Controllers
         //
         // Navbar Index: 7
         // POST: Admin/EditBlog
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult EditBlog(FormCollection fc, HttpPostedFileBase image)
         {
             if (!CheckLogin())
