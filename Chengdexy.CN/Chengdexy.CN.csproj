@@ -171,6 +171,7 @@
     <Compile Include="Models\ProgramEdition.cs" />
     <Compile Include="Utils\MD5maker.cs" />
     <Compile Include="ViewModels\AboutItemVM.cs" />
+    <Compile Include="ViewModels\AdminHomeVM.cs" />
     <Compile Include="ViewModels\BlogSketchVM.cs" />
     <Compile Include="ViewModels\NavbarItemVM.cs" />
     <Compile Include="Models\NavbarItem.cs" />

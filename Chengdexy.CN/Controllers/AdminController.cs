@@ -25,11 +25,17 @@ namespace Chengdexy.CN.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            ViewBag.JumbotronCount = db.Jumbotrons.Count();
-            ViewBag.ProgramCount = db.Programs.Count();
-            ViewBag.EditionCount = db.ProgramEditions.Count();
-            ViewBag.BlogCount = db.BlogPages.Count();
-            return View();
+
+            AdminHomeVM ahvm = new AdminHomeVM
+            {
+                adminName = db.AdminAccounts.FirstOrDefault().Account,
+                blogCount = db.BlogPages.Count(),
+                programCount=db.Programs.Count(),
+                editionCount=db.ProgramEditions.Count(),
+                programList=db.Programs.ToList()
+            };
+            
+            return View(ahvm);
         }
 
         //

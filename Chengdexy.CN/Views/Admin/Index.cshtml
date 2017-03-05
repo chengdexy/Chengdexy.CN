@@ -1,16 +1,26 @@
-﻿
+﻿@model Chengdexy.CN.ViewModels.AdminHomeVM
+
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
-@Html.Action("ShowSidebar",new { index=1})
+@Html.Action("ShowSidebar", new { index = 1 })
 
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h1 class="page-header">These are all the things you've done</h1>
+    <h1 class="page-header">欢迎您 @Model.adminName</h1>
+    <div>
+        <h3>快捷操作:</h3>
+        @Html.ActionLink("写一篇新博文", "AddNewBlog", null, new { @class = "btn btn-default" })
+        @Ajax.ActionLink("发布个新作品", "AddProgram", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "programEditor" }, new { @class = "btn btn-default" })
+        <div id="programEditor"></div>
+    </div>
+    <div>
+        <h3>统计信息:</h3>
         <ul>
-            <li><h3>制作首页巨幕 @ViewBag.JumbotronCount 个.</h3></li>
-            <li><h3>发布编程作品 @ViewBag.ProgramCount 个,共计 @ViewBag.EditionCount 个版本.</h3></li>
-            <li><h3>编写博客文章 @ViewBag.BlogCount 篇.</h3></li>
+            <li>累计发表博文: @Model.blogCount 篇</li>
+            <li>发布编程作品: @Model.programCount 个</li>
+            <li>累计作品版本: @Model.editionCount 个</li>
         </ul>
+    </div>
 </div>
