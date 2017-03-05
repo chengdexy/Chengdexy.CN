@@ -35,7 +35,7 @@ namespace Chengdexy.CN.Controllers
                 BlogPageTitle = sl.Title,
                 BlogPageSketch = sl.Sketch,
                 BlogPageImagePath = sl.ImagePath
-            }).ToList();
+            }).OrderByDescending(sl=>sl.BlogPageId) .ToList();
             return PartialView("~/Views/Shared/_PartialSketchList.cshtml", sketchList);
         }
 

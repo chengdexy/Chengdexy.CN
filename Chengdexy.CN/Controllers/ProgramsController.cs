@@ -22,7 +22,7 @@ namespace Chengdexy.CN.Controllers
         [ChildActionOnly]
         public ActionResult ShowProgramList()
         {
-            var programList = db.Programs.ToList();
+            var programList = db.Programs.OrderByDescending(pl => pl.ProgramEditions.Max(pe => pe.PublishDate)).ToList();
             return PartialView("~/Views/Shared/_PartialProgramList.cshtml", programList);
         }
 
