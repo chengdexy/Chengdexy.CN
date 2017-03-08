@@ -909,6 +909,36 @@ namespace Chengdexy.CN.Controllers
 
         }
 
+        //
+        // Get: /Admin/ImportBlogFromMD
+        public ActionResult ImportBlogFromMD()
+        {
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("~/Views/Admin/_PartialMDImporter.cshtml");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ImportBlogFromMD(FormCollection fc,HttpPostedFileBase uploadMD, HttpPostedFileBase image)
+        {
+            //解析md文件,获得title和content
+
+            //上传image文件,获得imagePath
+
+            //获取当前时刻作为CreateTime
+
+            //获取Sketch作为Summary
+            return View();
+        }
 
         //
         // Child Only: Show the sidebar

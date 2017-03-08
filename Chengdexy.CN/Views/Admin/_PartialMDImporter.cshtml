@@ -1,0 +1,24 @@
+﻿@using (Html.BeginForm("ImportBlogFormMD", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        <label for="uploadMD">An md File</label>
+        <input type="file" accept=".md" name="uploadMD" />
+    </div>
+    <label for="imageInHome">Image In Home</label>
+    <div class="form-group input-group image-preview col-md-6">
+        <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+        <span class="input-group-btn">
+            <!-- image-preview-input -->
+            <div class="btn btn-default image-preview-input">
+                <span class="glyphicon glyphicon-folder-open"></span>
+                <span class="image-preview-input-title">选择</span>
+                <input type="file" accept="image/png, image/jpeg, image/gif" name="image" /> <!-- rename it -->
+            </div>
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="inputSketch">Summary</label>
+        <textarea class="form-control" rows="3" id="inputSketch" name="inputSketch" placeholder="Input Summary Here..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">提交</button>
+}

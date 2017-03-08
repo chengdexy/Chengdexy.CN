@@ -12,8 +12,10 @@
     <div>
         <h3>快捷操作:</h3>
         @Html.ActionLink("写一篇新博文", "AddNewBlog", null, new { @class = "btn btn-default" })
+        @Ajax.ActionLink("从md文件导入", "ImportBlogFromMD", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "importEditor" }, new { @class = "btn btn-default" })
         @Ajax.ActionLink("发布个新作品", "AddProgram", null, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "programEditor" }, new { @class = "btn btn-default" })
         <div id="programEditor"></div>
+        <div id="importEditor"></div>
     </div>
     <div>
         <h3>统计信息:</h3>
