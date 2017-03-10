@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,11 +31,11 @@ namespace Chengdexy.CN.Controllers
             {
                 adminName = db.AdminAccounts.FirstOrDefault().Account,
                 blogCount = db.BlogPages.Count(),
-                programCount=db.Programs.Count(),
-                editionCount=db.ProgramEditions.Count(),
-                programList=db.Programs.ToList()
+                programCount = db.Programs.Count(),
+                editionCount = db.ProgramEditions.Count(),
+                programList = db.Programs.ToList()
             };
-            
+
             return View(ahvm);
         }
 
@@ -557,7 +558,7 @@ namespace Chengdexy.CN.Controllers
         //
         // Navbar Index: 7
         // POST: Admin/AddNewBlog
-        [HttpPost,ValidateInput(false)]
+        [HttpPost, ValidateInput(false)]
         public ActionResult AddNewBlog(FormCollection fc, HttpPostedFileBase image)
         {
             if (!CheckLogin())
@@ -928,16 +929,69 @@ namespace Chengdexy.CN.Controllers
         }
 
         [HttpPost]
-        public ActionResult ImportBlogFromMD(FormCollection fc,HttpPostedFileBase uploadMD, HttpPostedFileBase image)
+        public ActionResult ImportBlogFromMD(FormCollection fc, HttpPostedFileBase uploadMD, HttpPostedFileBase image)
         {
-            //解析md文件,获得title和content
-
+            if (!CheckLogin())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (uploadMD == null || uploadMD.ContentLength == 0 || image == null || image.ContentLength == 0)
+            {
+                //存在未上传内容
+                return RedirectToAction("ImportBlogFromMD");
+            }
+            else if (string.IsNullOrEmpty(fc["inputSketch"]))
+            {
+                //未填写Summary
+                return RedirectToAction("ImportBlogFromMD");
+            }
             //上传image文件,获得imagePath
-
+            const string fileTypes = "gif,jpg,jpeg,png,bmp";
+            const int maxSize = 205000;
+            string fileName = Guid.NewGuid().ToString();
+            string fileExt = Path.GetExtension(image.FileName);
+            string imgPath = "";
+            imgPath = $"/Images/{fileName}.{fileExt}";
+            if (image.ContentLength > maxSize)
+            {
+                //超大
+                return RedirectToAction("ImportBlogFromMD");
+            }
+            //var fileExt = Path.GetExtension(image.FileName);
+            if (string.IsNullOrEmpty(fileExt) || Array.IndexOf(fileTypes.Split(','), fileExt.Substring(1).ToLower()) == -1)
+            {
+                //扩展名不匹配
+                return RedirectToAction("ImportBlogFromMD");
+            }
+            image.SaveAs(Server.MapPath(imgPath));
+            //解析md文件,获得title和content
+            StreamReader sr = new StreamReader(uploadMD.InputStream);
+            string contentStr = sr.ReadToEnd().ToString();
+            string titleStr = Path.GetFileNameWithoutExtension(uploadMD.FileName);
+            Regex reg = new Regex("(?<=!\\[.*?\\]\\()imgs/.+?(?=\\))");
+            MatchCollection mc = reg.Matches(contentStr);
+            foreach (var match in mc)
+            {
+                string doneStr = match.ToString().Split('/')[1];
+                doneStr = "http://www.chengdexy.cn/imgs/blog/" + doneStr;
+                contentStr = contentStr.Replace(match.ToString(), doneStr);
+            }
             //获取当前时刻作为CreateTime
-
+            DateTime createTime = DateTime.Now;
             //获取Sketch作为Summary
-            return View();
+            string summaryStr = fc["inputSketch"];
+            //新建BlogPage并入库
+            BlogPage bp = new BlogPage
+            {
+                Content = contentStr,
+                CreateTime = createTime,
+                ImagePath = imgPath,
+                Sketch = summaryStr,
+                Title = titleStr
+            };
+            db.BlogPages.Add(bp);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Show", new { ID = bp.ID });
         }
 
         //
