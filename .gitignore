@@ -240,3 +240,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Chengdexy.CN/imgs/blog
+/Chengdexy.CN/Images
+/Chengdexy.CN/Properties/PublishProfiles/CustomProfile.pubxml

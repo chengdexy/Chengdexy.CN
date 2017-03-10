@@ -973,7 +973,7 @@ namespace Chengdexy.CN.Controllers
             foreach (var match in mc)
             {
                 string doneStr = match.ToString().Split('/')[1];
-                doneStr = "http://www.chengdexy.cn/imgs/blog/" + doneStr;
+                doneStr = "/imgs/blog/" + doneStr;
                 contentStr = contentStr.Replace(match.ToString(), doneStr);
             }
             //获取当前时刻作为CreateTime
