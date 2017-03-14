@@ -12,14 +12,14 @@
     {
         //内容列表项开始
         var mod = Model[i];
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style="height:10em;">
             <div class="hidden-xs col-sm-3  col-md-2 col-lg-3">
                 <a href="#" class="thumbnail"><img src="@mod.BlogPageImagePath" alt="" /></a>
             </div>
             <div class="col-xs-12  col-sm-9 col-md-10 col-lg-9">
-                <h3>@mod.BlogPageTitle</h3>
-                <p class="text-muted">@mod.BlogPageSketch</p>
-                <a href="@Url.Action("Index","Show", new { ID = mod.BlogPageId })" class="btn btn-default col-xs-3 col-xs-offset-9 col-sm-2 com-sm-offset-9 col-md-2 col-md-offset-9">详情...</a>
+                <h3><a href="@Url.Action("Index","Show", new { ID = mod.BlogPageId })" style="color:black;">@mod.BlogPageTitle</a></h3>
+                <p class="text-muted cut">@mod.BlogPageSketch</p>
+                @*<a href="@Url.Action("Index","Show", new { ID = mod.BlogPageId })" class="btn btn-default col-xs-3 col-xs-offset-9 col-sm-2 com-sm-offset-9 col-md-2 col-md-offset-9">详情...</a>*@
             </div>
         </div>
         //列表项结束
