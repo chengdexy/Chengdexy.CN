@@ -538,7 +538,7 @@ namespace Chengdexy.CN.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var blogList = db.BlogPages.ToList();
+            var blogList = db.BlogPages.OrderByDescending(bl=>bl.CreateTime).ToList();
             return View(blogList);
         }
 
